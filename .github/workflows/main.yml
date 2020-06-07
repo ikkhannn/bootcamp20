@@ -14,14 +14,14 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Setup Node.js environment
-      uses: actions/setup-node@v1.4.2
+      uses: actions/setup-node@v2-beta
       with:
           # Set always-auth in npmrc
           version: 12
@@ -39,4 +39,4 @@ jobs:
       run: npm install -g surge 
     
     - name: deploying on surge
-      run: surge react-base-app/build http://react-bootcamp-app.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
+      run: surge ./react-base-app/build react-bootcamp-app.surge.sh --token ${{ secrets.SURGE_TOKEN }}
